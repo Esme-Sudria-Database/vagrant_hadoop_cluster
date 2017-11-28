@@ -3,3 +3,5 @@ ssh.config
 scripts/id_rsa.pub
 **/*.pyc
 docker/data
+.idea/
+docker-compose.log
