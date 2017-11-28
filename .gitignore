@@ -2,3 +2,4 @@
 ssh.config
 scripts/id_rsa.pub
 **/*.pyc
+docker/data
