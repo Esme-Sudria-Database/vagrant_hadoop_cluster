@@ -1,0 +1,10 @@
+---
+- hosts: localhost
+  become: yes
+  vars:
+
+  roles:
+    - { role: docker }
+    - { role: docker-host }
+
+  handlers:

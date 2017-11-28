@@ -1,0 +1,55 @@
+---
+- name: ensure package necessary
+  apt: name="{{item}}"
+  with_items:
+    - apt-transport-https
+    - ca-certificates
+
+- name: reference the apt key for docker server
+  apt_key:
+    keyserver: hkp://p80.pool.sks-keyservers.net:80
+    id: 58118E89F3A912897C070ADBF76221572C52609D
+
+- name: ensure the repository is present
+  apt_repository:
+    repo: 'deb https://apt.dockerproject.org/repo ubuntu-xenial main'
+    state: present
+
+- name: ensure docker is up to date
+  apt:
+    name: docker-engine
+    state: latest
+
+- name: ensure docker is started and enabled at boot.
+  service:
+    name: docker
+    state: started
+    enabled: yes
+
+- name: ensure docker group exists to allow user from this group to use docker without sudo
+  group:
+    name: docker
+    state: present
+
+- name: ensure docker-py is up to date
+  pip:
+    name: docker
+    state: latest
+
+- name: ensure docker-compose is up to date
+  pip:
+    name: docker-compose
+    state: latest
+
+- name: ensure users are allow to use docker without sudo
+  user:
+    name: "vagrant"
+    groups: "docker"
+    append: True
+
+- name: ensure users are allow to use docker without sudo
+  user:
+    name: "{{ item }}"
+    groups: "docker"
+    append: True
+  with_items: "{{ users_allow_to_use_docker_without_sudo }}"

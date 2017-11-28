@@ -1,0 +1,3 @@
+---
+# defaults file for fabientools.docker
+users_allow_to_use_docker_without_sudo: []

@@ -1,0 +1,10 @@
+---
+- name: build docker image from docker-compose
+  shell: docker-compose build
+  args:
+    chdir: /home/vagrant/ansible/docker
+
+- name: configure docker image from docker-compose
+  shell: docker-compose up 2>&1 >> /vagrant/docker-compose.log
+  args:
+    chdir: /home/vagrant/ansible/docker

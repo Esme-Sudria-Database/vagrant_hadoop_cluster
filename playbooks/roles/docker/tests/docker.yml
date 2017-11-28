@@ -1,0 +1,8 @@
+- hosts: all
+  become: yes
+  vars:
+    docker_users_without_sudo:
+    - vagrant
+
+  roles:
+    - docker
