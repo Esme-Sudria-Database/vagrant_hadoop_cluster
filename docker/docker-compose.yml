@@ -7,10 +7,13 @@ services:
     depends_on:
       - namenode
       - datanode
+    volumes:
+      - ./code:/code
     env_file:
       - ./hadoop-hive.env
     ports:
       - "8032:8032"
+      - "8088:8088"
   namenode:
     image: bde2020/hadoop-namenode:1.1.0-hadoop2.8-java8
     container_name: namenode
